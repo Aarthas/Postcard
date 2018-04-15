@@ -1,4 +1,4 @@
-package promiserpkg;
+package promiserpkg.b;
 
 public class Promiser<T> {
 

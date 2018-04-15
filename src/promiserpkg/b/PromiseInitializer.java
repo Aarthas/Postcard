@@ -1,4 +1,4 @@
-package promiserpkg;
+package promiserpkg.b;
 
 @FunctionalInterface
 public interface PromiseInitializer<T> {

@@ -2,7 +2,7 @@ package promiserpkg.a;
 
 import java.util.ArrayList;
 
-public class MAction {
+public class _Postcard {
 
 
 
@@ -59,6 +59,7 @@ public class MAction {
             IInterceptor iInterceptor = interceptors.get(index);
 
             try {
+
                 iInterceptor.process(postcard, new InterceptorCallback() {
                     @Override
                     public void onContinue(Postcard postcard) {
@@ -83,10 +84,5 @@ public class MAction {
 
     }
 
-    public static Postcard build(Context context) {
-        Postcard postcard = new Postcard();
-        postcard.setContext(context);
 
-        return postcard;
-    }
 }

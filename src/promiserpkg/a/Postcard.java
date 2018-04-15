@@ -16,7 +16,7 @@ public final class Postcard  {
     private Object tag;             // A tag prepare for some thing wrong.
     private HashMap mBundle;         // Data to transform
     private int flags = -1;         // Flags of route
-    private int timeout = 300;      // Navigation timeout, TimeUnit.Second
+
     private IProvider provider;     // It will be set value, if this postcard was provider.
     private boolean greenChannel;
     Context context;
@@ -32,8 +32,9 @@ public final class Postcard  {
         return iLifeCircle;
     }
 
-    public void setContext(Context context) {
+    public Postcard withContext(Context context) {
         this.context = context;
+        return this;
     }
 
     public Context getContext() {
@@ -42,19 +43,8 @@ public final class Postcard  {
 
     ArrayList<IInterceptor> filters = new ArrayList();
 
-    private int enterAnim = -1;
-    private int exitAnim = -1;
     private Action action;
 
-
-
-    public int getEnterAnim() {
-        return enterAnim;
-    }
-
-    public int getExitAnim() {
-        return exitAnim;
-    }
 
     public IProvider getProvider() {
         return provider;
@@ -89,68 +79,6 @@ public final class Postcard  {
     }
 
 
-    public int getTimeout() {
-        return timeout;
-    }
-
-    /**
-     * Set timeout of navigation this time.
-     *
-     * @param timeout timeout
-     * @return this
-     */
-    public Postcard setTimeout(int timeout) {
-        this.timeout = timeout;
-        return this;
-    }
-
-
-//
-//    /**
-//     * Navigation to the route with path in postcard.
-//     * No param, will be use application context.
-//     */
-//    public Object navigation() {
-//        return navigation(null);
-//    }
-//
-//    /**
-//     * Navigation to the route with path in postcard.
-//     *
-//     * @param context Activity and so on.
-//     */
-//    public Object navigation(Context context) {
-//        return navigation(context, null);
-//    }
-
-//    /**
-//     * Navigation to the route with path in postcard.
-//     *
-//     * @param context Activity and so on.
-//     */
-//    public Object navigation(Context context, NavigationCallback callback) {
-//        return ARouter.getInstance().navigation(context, this, -1, callback);
-//    }
-//
-//    /**
-//     * Navigation to the route with path in postcard.
-//     *
-//     * @param mContext    Activity and so on.
-//     * @param requestCode startActivityForResult's param
-//     */
-//    public void navigation(Activity mContext, int requestCode) {
-//        navigation(mContext, requestCode, null);
-//    }
-//
-//    /**
-//     * Navigation to the route with path in postcard.
-//     *
-//     * @param mContext    Activity and so on.
-//     * @param requestCode startActivityForResult's param
-//     */
-//    public void navigation(Activity mContext, int requestCode, NavigationCallback callback) {
-//        ARouter.getInstance().navigation(mContext, this, requestCode, callback);
-//    }
 
     /**
      * Green channel, it will skip all of interceptors.
@@ -179,12 +107,12 @@ public final class Postcard  {
     }
 
     public void send() {
-        MAction.navigate(filters,this,action);
+        _Postcard.navigate(filters,this,action);
 
     }
 
     public void send(Action action) {
-        MAction.navigate(filters,this,action);
+        _Postcard.navigate(filters,this,action);
 
     }
     public Postcard setAction(Action action) {
@@ -220,21 +148,6 @@ public final class Postcard  {
     public int getFlags() {
         return flags;
     }
-
-//    /**
-//     * Set object value, the value will be convert to string by 'Fastjson'
-//     *
-//     * @param key   a String, or null
-//     * @param value a Object, or null
-//     * @return current
-//     */
-//    public Postcard withObject(@Nullable String key, @Nullable Object value) {
-//        serializationService = ARouter.getInstance().navigation(SerializationService.class);
-//        mBundle.putString(key, serializationService.object2Json(value));
-//        return this;
-//    }
-
-    // Follow api copy from #{Bundle}
 
 
 

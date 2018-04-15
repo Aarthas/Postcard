@@ -5,10 +5,10 @@ import promiserpkg.a.InterceptorCallback;
 
 public class main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
 
-//		MAction.build(null)
+//		_Postcard.build(null)
 //				.withFilter(new IInterceptor() {
 //					@Override
 //					public void process(Postcard postcard, InterceptorCallback callback) {
@@ -32,34 +32,51 @@ public class main {
 //		});
 
 
-		Postcard.build().withFilter(new IInterceptor() {
-			@Override
-			public void process(Postcard postcard, InterceptorCallback callback) {
-				System.out.println("111");
-				callback.onContinue(postcard.withData("a111"));
-			}
-		})
-				.withFilter(new IInterceptor() {
-					@Override
-					public void process(Postcard postcard, InterceptorCallback callback) {
-						System.out.println("22");
+        Postcard.build()
+                .withFilter(new IInterceptor() {
+                    @Override
+                    public void process(Postcard postcard, InterceptorCallback callback) {
+                        System.out.println("111");
+                        callback.onContinue(postcard.withData("a111"));
+                    }
+                })
+                .withFilter(new IInterceptor() {
+                    @Override
+                    public void process(Postcard postcard, InterceptorCallback callback) {
+                        System.out.println("22");
 //						callback.onContinue(postcard.withData("a111"));
-						callback.onInterrupt(null);
-					}
-				}).send(new Action() {
-			@Override
-			public void process(Postcard postcard) {
-				System.out.println("333");
-			}
-		});
+                        callback.onContinue(postcard.withData("a111"));
+                    }
+                })
 
-		Postcard.build().withData(new Apple()).send(new Action() {
-			@Override
-			public void process(Postcard postcard) {
-				Apple data = postcard.getData();
-				System.out.println(data);
-			}
-		});
+                .send(new Action() {
+                    @Override
+                    public void process(Postcard postcard) {
+                        System.out.println("333");
+                    }
+                });
+
+        Postcard postcard = Postcard.build().
+
+                withContext(new Context())
+                .withData(new Apple())
+                .withFilter(new IInterceptor() {
+                    @Override
+                    public void process(Postcard postcard, InterceptorCallback callback) {
+                        System.out.println("111");
+                        callback.onContinue(postcard);
+                    }
+                });
+        postcard.send(new Action() {
+            @Override
+            public void process(Postcard postcard) {
+                System.out.println("process 1");
+                Apple data = postcard.getData();
+                System.out.println(data);
+                postcard.send();
+            }
+        });
+
 //
 //		Promiser<String> req = new Promiser<String>();
 //
@@ -76,7 +93,7 @@ public class main {
 //
 //			}
 //		});
-				
+
 //		req.then((String res) -> {
 //			// Handle then here
 //			System.out.println("then");
@@ -122,8 +139,7 @@ public class main {
 //
 
 
-
-	}	
+    }
 
 }
 
