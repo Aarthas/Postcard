@@ -2,7 +2,6 @@ package promiserpkg;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
 
 public class ExampleService {
 	public static int offsetKudos = 0;	
@@ -19,7 +18,7 @@ public class ExampleService {
 			    public void run() {
 			    	// resolving 
 			    	System.out.println("END");
-					resolve.run("ça marche");
+					resolve.run("https://github.com/YannickDot/promiser-java.gita marche");
 			    }
 			}, ms);
 			
